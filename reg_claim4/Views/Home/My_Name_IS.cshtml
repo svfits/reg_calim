@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Редактирование ФИО";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+<h3>@ViewBag.text</h3>
+
+<div class="jumbotron">    
+    <div class="pedit_general_row clear_fix">
+        <div class="pedit_general_label fl_l ta_r">Имя:</div>
+        <div class="pedit_general_labeled fl_l">
+            <input type="text" value=@ViewBag.Name id="pedit_first_name" class="dark" autocomplete="off" />
+        </div>
+    </div>
+    <div class="pedit_general_row clear_fix">
+        <div class="pedit_general_label fl_l ta_r">Фамилия:</div>
+        <div class="pedit_general_labeled fl_l">
+            <input type="text" value=@ViewBag.Surname id="pedit_last_name" class="dark" autocomplete="off" />
+        </div>
+        <div class="fl_l" id="pedit_name_tt_place"></div>
+    </div>
+    <div class="pedit_general_row clear_fix">
+        <div class="pedit_general_label fl_l ta_r">Отчество:</div>
+        <div class="pedit_general_labeled fl_l">
+            <input type="text" value=@ViewBag.SecondName id="pedit_middle_name" class="dark" autocomplete="off" /><br /><hr />
+            <input type="submit" value="Отправить" />
+        </div>
+    </div>
+</div>
