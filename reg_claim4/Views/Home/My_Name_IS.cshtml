@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Редактирование ФИО";
+    @model IEnumerable<reg_claim4.Models.logs>
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
@@ -26,4 +27,47 @@
             <input type="submit" value="Отправить" />
         </div>
     </div>
+    <h2>Вы Заходили в Последний Раз</h2>
+    <table class="table">
+        <tr>
+            <th>
+                <p>ФИО</p>
+            </th>
+            <th>
+               <p>Событие</p>
+            </th>
+            <th>
+               <p>Время входа</p>
+            </th>
+            <th>
+                <p>IP адрес ПК</p>
+            </th>
+            <th>
+                <p>Имя ПК</p>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.LOGS)
+        {
+            <tr>
+                <td>
+                    <p>@item.UserName</p>
+                </td>
+                <td>
+                    <p>@item.events</p>
+                </td>
+                <td>
+                    <p>@item.dataTime</p>
+                </td>
+                <td>
+                    <p>@item.pc_ip</p>
+                </td>
+                <td>
+                    <p>@item.pc_name</p>
+                </td> 
+               
+            </tr>
+        }
+        </table>
 </div>

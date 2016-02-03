@@ -11,6 +11,31 @@ namespace reg_claim4.Controllers
     {
         public ActionResult Index()
         {
+            var value = Session["logNotLog"];
+            if (value == null)
+            {
+                Session["logNotLog"] = "true";
+                userdbContext db = new userdbContext();
+                try {
+                    db.logs.Add(new logs()
+                    {
+                        dataTime = DateTime.Now,
+                        events = "зашел на эту страницу",
+                        UserName = User.Identity.Name,
+                        pc_ip = PC.GetIPAddress(),
+                        pc_name = System.Net.Dns.GetHostName()
+                    });
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
+                }
+            }
+            else
+            {
+                Session["logNotLog"] = DateTime.Now;
+            }
             return View();
         }
 
@@ -42,21 +67,23 @@ namespace reg_claim4.Controllers
             string Surname;
             string SecondName;
 
+            userdbContext db = new userdbContext();
             ViewBag.Message = "Если у Вас не правильно отображается ФИО  ";
 
             AD.getUser(User.Identity.Name, out Name, out Surname, out SecondName);
             AD.getGrups("afanasievdv", "SCSM Группа поддержки пользователей");
 
+            /* для заведения заявок
             try
             {
-                userdbContext db = new userdbContext();
+               
                 // db.ClaimeName.Add(new claim()) { UserName = "test" , ClaimeName = "dfdsfd" , claimBody = "sdfsdfsdf" });
                 db.ClaimeName.Add(new claim()
                 {
-                    UserName = User.Identity.Name,
+                    UserNameFrom = User.Identity.Name,
                     ClaimeName = "Заявка",
                     claimBody = "тут тело завки",
-                    dataTime = DateTime.Now
+                    dataTimeOpen = DateTime.Now,                    
                 });
                 db.logs.Add(new logs()
                 {
@@ -72,11 +99,27 @@ namespace reg_claim4.Controllers
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
+            */
+
             ViewBag.Name = Name;
             ViewBag.Surname = Surname;
             ViewBag.SecondName = SecondName;
             ViewBag.Text = Request.UserHostName + "  444 " + PC.GetIPAddress();
 
+            try {
+                var log = db.logs
+                    .Where(c => c.UserName == User.Identity.Name)
+                    .AsEnumerable()
+                    .Reverse()
+                    .Take(10)
+                    .Reverse();
+
+                ViewBag.LOGS = log;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
             return View();
         }
 
@@ -84,14 +127,10 @@ namespace reg_claim4.Controllers
 
         public ActionResult ViewPage1()
         {
-            userdbContext db = new userdbContext();
-                        
+            userdbContext db = new userdbContext();                        
             IEnumerable<logs> log = db.logs;
             ViewBag.Message = log;
             return View();
         }
-
-
-
     }
 }

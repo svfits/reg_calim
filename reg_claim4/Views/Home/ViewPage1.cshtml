@@ -6,7 +6,6 @@
 }
 
 <h2>ViewPage1</h2>
-<h3>@ViewBag.Message</h3>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -53,14 +52,7 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-         @*
-        <td><p>@item.UserName</p></td>
-        <td><p>@item.events</p></td>
-        <td><p>@item.dataTime</p></td>
-        <td><p>@item.pc_ip</p></td>
-        <td><p>@item.pc_name</p></td>
-         *@
+        </td>       
     </tr>
 }
         
