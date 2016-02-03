@@ -1,6 +1,7 @@
 ﻿using reg_claim4.Models;
 using System;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace reg_claim4.Controllers
 {
@@ -82,10 +83,10 @@ namespace reg_claim4.Controllers
         public ActionResult ViewPage1()
         {
             userdbContext db = new userdbContext();
-            db.logs.Add();
-            ViewBag.Message = "Вопросы разработчикам.";
+                        
+            ViewBag.Message = db.logs.First().pc_ip;
 
-            return View(db.pc_ip);
+            return View();
         }
 
 
