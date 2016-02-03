@@ -1,7 +1,9 @@
 ﻿using reg_claim4.Models;
 using System;
-using System.Web.Mvc;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
 namespace reg_claim4.Controllers
 {
@@ -84,8 +86,8 @@ namespace reg_claim4.Controllers
         {
             userdbContext db = new userdbContext();
                         
-            ViewBag.Message = db.logs.First().pc_ip;
-
+            IEnumerable<logs> log = db.logs;
+            ViewBag.Message = log;
             return View();
         }
 

@@ -30,30 +30,38 @@
         </th>
         <th></th>
     </tr>
-    @*
-@foreach (var item in Model) {
+    
+@foreach (var item in ViewBag.Message) {
     <tr>
+        
         <td>
-            @Html.DisplayFor(modelItem => item.UserName)
+            <p>@item.UserName</p>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.events)
+            <p>@item.events</p>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.dataTime)
+            <p>@item.dataTime</p>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.pc_ip)
+            <p>@item.pc_ip</p>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.pc_name)
+            <p>@item.pc_name</p>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
+         @*
+        <td><p>@item.UserName</p></td>
+        <td><p>@item.events</p></td>
+        <td><p>@item.dataTime</p></td>
+        <td><p>@item.pc_ip</p></td>
+        <td><p>@item.pc_name</p></td>
+         *@
     </tr>
 }
-        *@
+        
 </table>
