@@ -213,6 +213,7 @@
     <Content Include="Views\Home\My_Name_IS.cshtml" />
     <Content Include="Views\Home\Questions_To_Program.cshtml" />
     <Content Include="Views\Home\ViewPage1.cshtml" />
+    <Content Include="Views\Home\AddClaim.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

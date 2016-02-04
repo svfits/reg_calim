@@ -132,5 +132,41 @@ namespace reg_claim4.Controllers
             ViewBag.Message = log;
             return View();
         }
+
+        [HttpGet]
+        public ActionResult AddClaim()
+        {
+           // ViewBag.ClaimId = id;
+            return View();
+        }
+        [HttpPost]
+        public string AddClaim(string UserNameFrom, string UserNameWhom,string GroupWhom,string evants,string ClaimeName,string parents,string category)
+        {
+            userdbContext db = new userdbContext();
+
+            try
+            {
+                db.ClaimeName.Add(new claim()
+                {
+                    UserNameFrom = User.Identity.Name,
+                    ClaimeName = "Заявка",
+                    UserNameWhom = "",
+                    claimBody = "тут тело завки",
+                    dataTimeOpen = DateTime.Now,
+                    dataTimeEnd = DateTime.Now,
+                    evants = evants,
+                    parents = parents,
+                    category = category
+                });
+              
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+            
+            return "Ваша Заявка Зарегистрирована";
+        }
     }
 }
