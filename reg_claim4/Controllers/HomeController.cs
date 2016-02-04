@@ -39,14 +39,14 @@ namespace reg_claim4.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult fromUser()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult onUser()
         {
             ViewBag.Message = "Your contact page.";
 
