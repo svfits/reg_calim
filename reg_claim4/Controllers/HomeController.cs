@@ -140,7 +140,7 @@ namespace reg_claim4.Controllers
             return View();
         }
         [HttpPost]
-        public string AddClaim(string UserNameFrom, string UserNameWhom,string GroupWhom,string evants,string ClaimeName,string parents,string category)
+        public string AddClaim(string UserNameFrom, string UserNameWhom,string GroupWhom,string evants,string ClaimeName,string parents,string category, string claimBody)
         {
             userdbContext db = new userdbContext();
 
@@ -151,7 +151,7 @@ namespace reg_claim4.Controllers
                     UserNameFrom = User.Identity.Name,
                     ClaimeName = "Заявка",
                     UserNameWhom = "",
-                    claimBody = "тут тело завки",
+                    claimBody = claimBody,
                     dataTimeOpen = DateTime.Now,
                     dataTimeEnd = DateTime.Now,
                     evants = evants,
@@ -166,7 +166,7 @@ namespace reg_claim4.Controllers
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
             
-            return "Ваша Заявка Зарегистрирована";
+            return "Ваша Заявка Зарегистрирована" ;
         }
     }
 }
