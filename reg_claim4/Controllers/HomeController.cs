@@ -9,13 +9,13 @@ namespace reg_claim4.Controllers
 {
     public class HomeController : Controller
     {
+        userdbContext db = new userdbContext();
         public ActionResult Index()
         {
             var value = Session["logNotLog"];
             if (value == null)
             {
-                Session["logNotLog"] = "true";
-                userdbContext db = new userdbContext();
+                Session["logNotLog"] = "true";                
                 try {
                     db.logs.Add(new logs()
                     {
@@ -66,8 +66,7 @@ namespace reg_claim4.Controllers
             string Name;
             string Surname;
             string SecondName;
-
-            userdbContext db = new userdbContext();
+          
             ViewBag.Message = "Если у Вас не правильно отображается ФИО  ";
 
             AD.getUser(User.Identity.Name, out Name, out Surname, out SecondName);
@@ -99,8 +98,7 @@ namespace reg_claim4.Controllers
        // logs db = new logs();
 
         public ActionResult ViewPage1()
-        {
-            userdbContext db = new userdbContext();                        
+        {                                  
             IEnumerable<logs> log = db.logs;
             ViewBag.Message = log;
             return View();
@@ -114,8 +112,7 @@ namespace reg_claim4.Controllers
         }
         [HttpPost]
         public string AddClaim(string UserNameFrom, string UserNameWhom,string GroupWhom,string evants,string ClaimeName,string parents,string category, string claimBody)
-        {
-            userdbContext db = new userdbContext();
+        {        
 
             try
             {

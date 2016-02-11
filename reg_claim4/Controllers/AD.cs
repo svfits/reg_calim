@@ -1,4 +1,5 @@
-﻿using System;
+﻿using reg_claim4.Models;
+using System;
 using System.DirectoryServices;
 
 namespace reg_claim4.Controllers
@@ -7,9 +8,9 @@ namespace reg_claim4.Controllers
     {
         static public string getUser(string uLogin, out string Name, out string Surname, out string SecondName)
         {
-            string notDomain = uLogin.Remove(0, 5);
+            string notDomain = uLogin.Split('\\')[1].ToString();
             string filter = string.Format("(&(ObjectClass={0})(sAMAccountName={1}))", "person", notDomain);
-            string domain = "isea.ru";
+            string domain = uLogin.Split('\\')[0].ToString(); ;
             string[] properties = new string[] { "fullname" };
             string displayName;
             string[] BigName;
@@ -77,8 +78,9 @@ namespace reg_claim4.Controllers
             }
         }
 
-        static public void FromADtoBD()
+       static public void FromADtoBD()
         {
+            userdbContext db = new userdbContext();
             try
             {
                 string domain = "isea.ru";
@@ -94,25 +96,25 @@ namespace reg_claim4.Controllers
                 if (resultCol != null)
                 {
                     for (int counter = 0; counter < resultCol.Count; counter++)
-                    {
-                        string UserNameEmailString = string.Empty;
+                    {                      
                         result = resultCol[counter];
                         if (result.Properties.Contains("samaccountname") &&
                                  result.Properties.Contains("mail") &&
                             result.Properties.Contains("displayname"))
-                        {
-                            //Users objSurveyUsers = new Users();
-                            //objSurveyUsers.Email = (String)result.Properties["mail"][0] +
-                            //  "^" + (String)result.Properties["displayname"][0];
-                            //objSurveyUsers.UserName = (String)result.Properties["samaccountname"][0];
-                            //objSurveyUsers.DisplayName = (String)result.Properties["displayname"][0];
-                            //lstADUsers.Add(objSurveyUsers);
-                            System.Diagnostics.Debug.WriteLine((String)result.Properties["displayname"][0] + "11111111111111111111111111111111111111111111111111111111");
-
+                        {                          
+                            db.Ad_users.Add(new Ad_users()
+                            {
+                                Email = (String)result.Properties["mail"][0],
+                                UserName = (String)result.Properties["samaccountname"][0],
+                                DisplayName = (String)result.Properties["displayname"][0], 
+                                role = ""                                
+                            } );
                         }
+                        System.Diagnostics.Debug.WriteLine((string)result.Properties["usergroup"][0]);
                     }
+                    db.SaveChanges();
                 }
-                //return lstADUsers;
+                
             }
             catch (Exception ex)
             {
