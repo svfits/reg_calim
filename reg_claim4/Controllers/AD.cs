@@ -77,5 +77,48 @@ namespace reg_claim4.Controllers
             }
         }
 
+        static public void FromADtoBD()
+        {
+            try
+            {
+                string domain = "isea.ru";
+                DirectoryEntry adRoot = new DirectoryEntry("LDAP://" + domain, null, null, AuthenticationTypes.Secure);
+                DirectorySearcher search = new DirectorySearcher(adRoot);
+                search.Filter = "(&(objectClass=user)(objectCategory=person))";
+                search.PropertiesToLoad.Add("samaccountname");
+                search.PropertiesToLoad.Add("mail");
+                search.PropertiesToLoad.Add("usergroup");
+                search.PropertiesToLoad.Add("displayname");//first name
+                SearchResult result;
+                SearchResultCollection resultCol = search.FindAll();
+                if (resultCol != null)
+                {
+                    for (int counter = 0; counter < resultCol.Count; counter++)
+                    {
+                        string UserNameEmailString = string.Empty;
+                        result = resultCol[counter];
+                        if (result.Properties.Contains("samaccountname") &&
+                                 result.Properties.Contains("mail") &&
+                            result.Properties.Contains("displayname"))
+                        {
+                            //Users objSurveyUsers = new Users();
+                            //objSurveyUsers.Email = (String)result.Properties["mail"][0] +
+                            //  "^" + (String)result.Properties["displayname"][0];
+                            //objSurveyUsers.UserName = (String)result.Properties["samaccountname"][0];
+                            //objSurveyUsers.DisplayName = (String)result.Properties["displayname"][0];
+                            //lstADUsers.Add(objSurveyUsers);
+                            System.Diagnostics.Debug.WriteLine((String)result.Properties["displayname"][0] + "11111111111111111111111111111111111111111111111111111111");
+
+                        }
+                    }
+                }
+                //return lstADUsers;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+
+        }
     }
 }

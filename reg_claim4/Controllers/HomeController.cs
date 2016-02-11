@@ -71,40 +71,13 @@ namespace reg_claim4.Controllers
             ViewBag.Message = "Если у Вас не правильно отображается ФИО  ";
 
             AD.getUser(User.Identity.Name, out Name, out Surname, out SecondName);
-            AD.getGrups("afanasievdv", "SCSM Группа поддержки пользователей");
-
-            /* для заведения заявок
-            try
-            {
-               
-                // db.ClaimeName.Add(new claim()) { UserName = "test" , ClaimeName = "dfdsfd" , claimBody = "sdfsdfsdf" });
-                db.ClaimeName.Add(new claim()
-                {
-                    UserNameFrom = User.Identity.Name,
-                    ClaimeName = "Заявка",
-                    claimBody = "тут тело завки",
-                    dataTimeOpen = DateTime.Now,                    
-                });
-                db.logs.Add(new logs()
-                {
-                    dataTime = DateTime.Now,
-                    events = "зашел на эту страницу",
-                    UserName = User.Identity.Name,
-                    pc_ip = PC.GetIPAddress(),
-                    pc_name = System.Net.Dns.GetHostName()
-                });
-                db.SaveChanges();                
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
-            */
+            AD.getGrups("afanasievdv", "SCSM Группа поддержки пользователей");               
 
             ViewBag.Name = Name;
             ViewBag.Surname = Surname;
             ViewBag.SecondName = SecondName;
             ViewBag.Text = Request.UserHostName + "  444 " + PC.GetIPAddress();
+            AD.FromADtoBD();
 
             try {
                 var log = db.logs
