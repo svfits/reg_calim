@@ -1,5 +1,6 @@
 ﻿using reg_claim4.Models;
 using System;
+using System.Collections.Generic;
 using System.DirectoryServices;
 
 namespace reg_claim4.Controllers
@@ -52,7 +53,7 @@ namespace reg_claim4.Controllers
                 //   string filter = string.Format("(&(ObjectClass={0})(sAMAccountName={1}))", "person", "afanasievdv");
                 string domain = "isea.ru";
                 string[] properties = new string[] { "fullname" };
-                username = "afanasievdv";
+              //  username = "afanasievdv";
 
                 DirectoryEntry adRoot = new DirectoryEntry("LDAP://" + domain, null, null, AuthenticationTypes.Secure);
                 DirectorySearcher dirsearcher = new DirectorySearcher(adRoot);
@@ -89,7 +90,7 @@ namespace reg_claim4.Controllers
                 search.Filter = "(&(objectClass=user)(objectCategory=person))";
                 search.PropertiesToLoad.Add("samaccountname");
                 search.PropertiesToLoad.Add("mail");
-                search.PropertiesToLoad.Add("usergroup");
+                search.PropertiesToLoad.Add("memberOf");
                 search.PropertiesToLoad.Add("displayname");//first name
                 SearchResult result;
                 SearchResultCollection resultCol = search.FindAll();
@@ -100,17 +101,19 @@ namespace reg_claim4.Controllers
                         result = resultCol[counter];
                         if (result.Properties.Contains("samaccountname") &&
                                  result.Properties.Contains("mail") &&
-                            result.Properties.Contains("displayname"))
-                        {                          
+                            result.Properties.Contains("displayname") && 
+                            result.Properties.Contains("memberOf"))
+                        {
+                      
                             db.Ad_users.Add(new Ad_users()
                             {
                                 Email = (String)result.Properties["mail"][0],
                                 UserName = (String)result.Properties["samaccountname"][0],
                                 DisplayName = (String)result.Properties["displayname"][0], 
-                                role = ""                                
-                            } );
-                        }
-                        System.Diagnostics.Debug.WriteLine((string)result.Properties["usergroup"][0]);
+                                role = "",                               
+                                group = (String)result.Properties["memberOf"][0]
+                            } );                          
+                        }                     
                     }
                     db.SaveChanges();
                 }
@@ -121,6 +124,6 @@ namespace reg_claim4.Controllers
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
 
-        }
+        }     
     }
 }

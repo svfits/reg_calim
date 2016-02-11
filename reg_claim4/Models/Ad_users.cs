@@ -15,7 +15,7 @@ namespace reg_claim4.Models
         public string UserName { get; set; }
         public string DisplayName { get; set; }
         public string role { get; set; }
-        public List<Groups> group { get; set; }
+        public string group { get; set; }
         public virtual List<Groups> Groups { get; set; }
     }
     public class Groups
