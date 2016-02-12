@@ -1,4 +1,5 @@
-﻿using reg_claim4.Models;
+﻿using reg_claim4.filters;
+using reg_claim4.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,15 @@ namespace reg_claim4.Controllers
     public class HomeController : Controller
     {
         userdbContext db = new userdbContext();
+        [Log]
         public ActionResult Index()
         {
             //var value = Session["logNotLog"];
             //if (value == null)
             //{
-            //    Session["logNotLog"] = "true";                
-            //    try {
+            //    Session["logNotLog"] = "true";
+            //    try
+            //    {
             //        db.logs.Add(new logs()
             //        {
             //            dataTime = DateTime.Now,
@@ -39,6 +42,7 @@ namespace reg_claim4.Controllers
             return View();
         }
 
+        [Log]
         public ActionResult fromUser()
         {
             ViewBag.Message = "Your application description page.";
@@ -46,6 +50,7 @@ namespace reg_claim4.Controllers
             return View();
         }
 
+        [Log]
         public ActionResult onUser()
         {
             ViewBag.Message = "Your contact page.";
@@ -53,6 +58,7 @@ namespace reg_claim4.Controllers
             return View();
         }
 
+        [Log]
         public ActionResult Questions_To_Program()
         {
             ViewBag.Message = "Вопросы разработчикам.";
@@ -60,6 +66,7 @@ namespace reg_claim4.Controllers
             return View();
         }
 
+        [Log]
         public ActionResult My_Name_IS()
         {
 
@@ -95,8 +102,9 @@ namespace reg_claim4.Controllers
             return View();
         }
 
-       // logs db = new logs();
+        // logs db = new logs();
 
+        [Log]
         public ActionResult ViewPage1()
         {                                  
             IEnumerable<logs> log = db.logs;
@@ -105,12 +113,14 @@ namespace reg_claim4.Controllers
         }
 
         [HttpGet]
+        [Log]
         public ActionResult AddClaim()
         {
            // ViewBag.ClaimId = id;
             return View();
         }
         [HttpPost]
+        [Log]
         public string AddClaim(string UserNameFrom, string UserNameWhom,string GroupWhom,string evants,string ClaimeName,string parents,string category, string claimBody)
         {        
 
