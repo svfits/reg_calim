@@ -104,14 +104,15 @@ namespace reg_claim4.Controllers
                             result.Properties.Contains("displayname") && 
                             result.Properties.Contains("memberOf"))
                         {
-                      
+                            string groups = (String)result.Properties["memberOf"][0];
+                            groups = groups.Replace("CN=", "").Replace("OU=БГУЭП","").Replace("DC=isea","").Replace("DC=ru","").Replace("OU=","");
                             db.Ad_users.Add(new Ad_users()
                             {
                                 Email = (String)result.Properties["mail"][0],
                                 UserName = (String)result.Properties["samaccountname"][0],
                                 DisplayName = (String)result.Properties["displayname"][0], 
                                 role = "",                               
-                                group = (String)result.Properties["memberOf"][0]
+                                group = groups
                             } );                          
                         }                     
                     }
