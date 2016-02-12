@@ -27,6 +27,9 @@
         <th>
             @Html.DisplayNameFor(model => model.pc_name)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
         <th></th>
     </tr>
     
@@ -47,6 +50,9 @@
         </td>
         <td>
             <p>@item.pc_name</p>
+        </td>
+        <td>
+            <p>@item.Url</p>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

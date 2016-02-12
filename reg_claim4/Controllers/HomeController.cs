@@ -12,30 +12,30 @@ namespace reg_claim4.Controllers
         userdbContext db = new userdbContext();
         public ActionResult Index()
         {
-            var value = Session["logNotLog"];
-            if (value == null)
-            {
-                Session["logNotLog"] = "true";                
-                try {
-                    db.logs.Add(new logs()
-                    {
-                        dataTime = DateTime.Now,
-                        events = "зашел на эту страницу",
-                        UserName = User.Identity.Name,
-                        pc_ip = PC.GetIPAddress(),
-                        pc_name = System.Net.Dns.GetHostName()
-                    });
-                    db.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine(ex.ToString());
-                }
-            }
-            else
-            {
-                Session["logNotLog"] = DateTime.Now;
-            }
+            //var value = Session["logNotLog"];
+            //if (value == null)
+            //{
+            //    Session["logNotLog"] = "true";                
+            //    try {
+            //        db.logs.Add(new logs()
+            //        {
+            //            dataTime = DateTime.Now,
+            //            events = "зашел на эту страницу",
+            //            UserName = User.Identity.Name,
+            //            pc_ip = PC.GetIPAddress(),
+            //            pc_name = System.Net.Dns.GetHostName()
+            //        });
+            //        db.SaveChanges();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        System.Diagnostics.Debug.WriteLine(ex.ToString());
+            //    }
+            //}
+            //else
+            //{
+            //    Session["logNotLog"] = DateTime.Now;
+            //}
             return View();
         }
 

@@ -159,9 +159,15 @@
     <Compile Include="Controllers\AD.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PC.cs" />
+    <Compile Include="filters\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602120246508_InitialCreate.cs" />
+    <Compile Include="Migrations\201602120246508_InitialCreate.Designer.cs">
+      <DependentUpon>201602120246508_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Ad_users.cs" />
     <Compile Include="Models\category_claim.cs" />
     <Compile Include="Models\claim.cs" />
@@ -229,6 +235,11 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201602120246508_InitialCreate.resx">
+      <DependentUpon>201602120246508_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
