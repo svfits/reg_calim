@@ -52,7 +52,7 @@ namespace reg_claim4.Controllers
                         System.Diagnostics.Debug.WriteLine(item.DisplayName.ToString());
                     }
 
-                    PartialView(User);
+                 return   PartialView(User);
                 }
                 else
                 {
