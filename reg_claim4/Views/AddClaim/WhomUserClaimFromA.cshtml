@@ -1,0 +1,12 @@
+﻿
+@model IEnumerable<reg_claim4.Models.Ad_users>
+
+<div id="searchresults">
+    <h3>Все книги автора : @Model.First().UserName</h3>
+    <ul>
+        @foreach (var item in Model )
+        {
+            <li>@item.</li>
+        }
+    </ul>
+</div>

@@ -17,7 +17,7 @@
     <AssemblyName>reg_claim4</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
@@ -157,6 +157,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AD.cs" />
+    <Compile Include="Controllers\AddClaimController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PC.cs" />
     <Compile Include="filters\LogAttribute.cs" />
@@ -221,6 +222,7 @@
     <Content Include="Views\Home\Questions_To_Program.cshtml" />
     <Content Include="Views\Home\ViewPage1.cshtml" />
     <Content Include="Views\Home\AddClaim.cshtml" />
+    <Content Include="Views\AddClaim\WhomUserClaimFromA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -255,16 +257,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>56503</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56503/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

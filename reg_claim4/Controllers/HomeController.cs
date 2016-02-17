@@ -83,7 +83,10 @@ namespace reg_claim4.Controllers
             ViewBag.Surname = Surname;
             ViewBag.SecondName = SecondName;
             ViewBag.Text = Request.UserHostName + "  444 " + PC.GetIPAddress();
-            AD.FromADtoBD();
+
+            //  AD.FromADtoBD();  //добавление пользователей в из АД
+           // AddClaimController.WhomUserClaimFromAD("fffff");
+           // AddClaimController.WhomUserClaimFromAD("Ковал");
 
             try {
                 var log = db.logs
