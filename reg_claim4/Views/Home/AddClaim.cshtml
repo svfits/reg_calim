@@ -78,7 +78,7 @@
     </div>
 
 
-    <input id="acInput" type="text" data-WhomUserClaimFromAD='@Url.Action("WhomUserClaimFromA","AddClaimController")' />
+    @*<input id="acInput" type="text" data-WhomUserClaimFromAD='@Url.Action("WhomUserClaimFromAD","AddClaim")' />
 
     <script type="text/javascript">
         $(function() {
@@ -91,6 +91,18 @@
                 minLength:  2
             })
         });
+    </script>*@
+
+    <input type="text" name="name" data-autocomplete-source='@Url.Action("WhomUserClaimFromAD","AddClaim")' />
+    <input type="submit" value="Поиск" />
+
+    <script type="text/javascript">
+    $(function () {
+        $("[data-autocomplete-source]").each(function () {
+            var target = $(this);
+            target.autocomplete({ source: target.attr("data-autocomplete-source") });
+        });
+    });
     </script>
 
 }

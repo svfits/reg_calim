@@ -13,16 +13,15 @@ namespace reg_claim4.Controllers
         /// <summary>
         /// для заведения Заявок вывод запросов из БД во время заведения
         /// </summary>              
-        
-        [HttpPost]
-        public  ActionResult WhomUserClaimFromAD(string letters)
+                
+        public  ActionResult WhomUserClaimFromAD(string term)
         {
             userdbContext db = new userdbContext();
            
             try
             {
                 var user = db.Ad_users
-                    .Where(c => c.UserName.StartsWith(letters))
+                    .Where(c => c.UserName.StartsWith(term))
                     .AsEnumerable()                    
                     .Take(10)
                     .ToList();
@@ -40,7 +39,7 @@ namespace reg_claim4.Controllers
                 {
                   System.Diagnostics.Debug.WriteLine("не найден пользователь!!!!!!!!!!!!!!!!!!!");
                     user = db.Ad_users
-                   .Where(c => c.DisplayName.StartsWith(letters))
+                   .Where(c => c.DisplayName.StartsWith(term))
                    .AsEnumerable()
                    .Take(10)
                    .ToList();
@@ -52,20 +51,20 @@ namespace reg_claim4.Controllers
                         System.Diagnostics.Debug.WriteLine(item.DisplayName.ToString());
                     }
 
-                 return   PartialView(User);
+                    return Json(user, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    return PartialView(User);
+                    return Json(user, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 System.Diagnostics.Debug.WriteLine("ошибка пользователь не найден ");
-                return HttpNotFound();
+                return Json("что то пошло не так тут", JsonRequestBehavior.AllowGet);
             }
-            return PartialView(User);
+           
         }
       
     }
