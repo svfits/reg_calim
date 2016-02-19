@@ -1,20 +1,17 @@
-﻿@model reg_claim4.Models.claim
-
+﻿﻿@model reg_claim4.Models.claim
 @{
     ViewBag.Title = "Зарегистрировать Заявку";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h4>Зарегистрировать Заявку</h4>
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
+
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">        
+
+    <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
         <div class="form-group">
             <label class="control-label col-md-2" for=".UserNameFrom">Заявитель</label>
             <div class="col-md-10">
@@ -22,7 +19,6 @@
                 @Html.ValidationMessageFor(model => model.UserNameFrom, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <label class="control-label col-md-2" for=".UserNameWhom">Кому предназначена Заявка</label>
             <div class="col-md-10">
@@ -30,7 +26,6 @@
                 @Html.ValidationMessageFor(model => model.UserNameWhom, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <label class="control-label col-md-2" for=".GroupWhom">Группа которой назначить заявку</label>
             <div class="col-md-10">
@@ -38,7 +33,6 @@
                 @Html.ValidationMessageFor(model => model.GroupWhom, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.ClaimeName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -46,15 +40,14 @@
                 @Html.ValidationMessageFor(model => model.ClaimeName, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.claimBody, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">              
-                @Html.TextAreaFor(model => model.claimBody ,5 , 10, htmlAttributes: new { @class = "form-control" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.claimBody, 5, 10, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.claimBody, "", new { @class = "text-danger" })
             </div>
         </div>
- 
+
         <div class="form-group">
             @Html.LabelFor(model => model.dataTimeEnd, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -62,7 +55,7 @@
                 @Html.ValidationMessageFor(model => model.dataTimeEnd, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.parents, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -70,7 +63,6 @@
                 @Html.ValidationMessageFor(model => model.parents, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.category, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -78,7 +70,6 @@
                 @Html.ValidationMessageFor(model => model.category, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -86,19 +77,23 @@
         </div>
     </div>
 
-    <div>
-        @using (Ajax.BeginForm("WhomUserClaimFromA", "AddClaim", new AjaxOptions { UpdateTargetId = "results" }))
-        {
-            <input type="text" name="name" />
-            <input type="submit" value="Поиск" />
-        }
-        <div id="results"></div>
-    </div>
 
-    @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+    <input id="acInput" type="text" data-WhomUserClaimFromAD='@Url.Action("WhomUserClaimFromA","AddClaimController")' />
+
+    <script type="text/javascript">
+        $(function() {
+
+            var flowers = ["Астра", "Нарцисс", "Роза", "Пион", "Примула",
+			      "Подснежник", "Мак", "Первоцвет", "Петуния", "Фиалка"];
+
+            $('#acInput').autocomplete({
+                source:flowers,
+                minLength:  2
+            })
+        });
+    </script>
+
 }
-
 <div>
     @Html.ActionLink("Вернутся на главную страинцу", "Index")
 </div>
