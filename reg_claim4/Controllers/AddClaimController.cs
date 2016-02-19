@@ -49,6 +49,7 @@ namespace reg_claim4.Controllers
                        // System.Diagnostics.Debug.WriteLine(item.Email.ToString());
                        // System.Diagnostics.Debug.WriteLine(item.UserName.ToString());
                         System.Diagnostics.Debug.WriteLine(item.DisplayName.ToString());
+
                     }
 
                     return Json(user, JsonRequestBehavior.AllowGet);
