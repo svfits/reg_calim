@@ -22,6 +22,7 @@ namespace reg_claim4.Controllers
             {
                 var user = db.Ad_users
                     .Where(c => c.UserName.StartsWith(term))
+                    .Select(c => c.UserName)
                     .AsEnumerable()                    
                     .Take(10)
                     .ToList();
@@ -29,7 +30,7 @@ namespace reg_claim4.Controllers
               foreach(var item in user)
                 {
                   //  System.Diagnostics.Debug.WriteLine(item.Email.ToString());
-                    System.Diagnostics.Debug.WriteLine(item.UserName.ToString());
+                  //  System.Diagnostics.Debug.WriteLine(item.UserName.ToString());
                   //  System.Diagnostics.Debug.WriteLine(item.DisplayName.ToString());
                 }            
               
@@ -37,20 +38,19 @@ namespace reg_claim4.Controllers
                 
                 if (user.Count<=0)
                 {
-                  System.Diagnostics.Debug.WriteLine("не найден пользователь!!!!!!!!!!!!!!!!!!!");
-                    user = db.Ad_users
-                   .Where(c => c.DisplayName.StartsWith(term))
-                   .AsEnumerable()
-                   .Take(10)
-                   .ToList();
+                  //System.Diagnostics.Debug.WriteLine("не найден пользователь!!!!!!!!!!!!!!!!!!!");
+                  //  user = db.Ad_users
+                  // .Where(c => c.DisplayName.StartsWith(term))
+                  // .AsEnumerable()
+                  // .Take(10)
+                  // .ToList();
                     
-                    foreach (var item in user)
-                    {
-                       // System.Diagnostics.Debug.WriteLine(item.Email.ToString());
-                       // System.Diagnostics.Debug.WriteLine(item.UserName.ToString());
-                        System.Diagnostics.Debug.WriteLine(item.DisplayName.ToString());
-
-                    }
+                  //  foreach (var item in user)
+                  //  {
+                  //     // System.Diagnostics.Debug.WriteLine(item.Email.ToString());
+                  //     // System.Diagnostics.Debug.WriteLine(item.UserName.ToString());
+                  //      System.Diagnostics.Debug.WriteLine(item.DisplayName.ToString());
+                  //  }
 
                     return Json(user, JsonRequestBehavior.AllowGet);
                 }
