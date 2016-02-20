@@ -23,7 +23,8 @@ namespace reg_claim4.Controllers
                 var user = db.Ad_users
                     .Where(c => c.UserName.StartsWith(term))
                     .Select(c => c.UserName)
-                    .AsEnumerable()                    
+                    .AsEnumerable()
+                    .Distinct()                    
                     .Take(10)
                     .ToList();
 
