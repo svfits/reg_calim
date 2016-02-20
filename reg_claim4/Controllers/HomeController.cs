@@ -110,7 +110,11 @@ namespace reg_claim4.Controllers
         [Log]
         public ActionResult ViewPage1()
         {                                  
-            IEnumerable<logs> log = db.logs;
+            IEnumerable<logs> log = db.logs
+                .AsEnumerable()
+                .Reverse()
+                .Take(10)
+                .Reverse();
             ViewBag.Message = log;
             return View();
         }
