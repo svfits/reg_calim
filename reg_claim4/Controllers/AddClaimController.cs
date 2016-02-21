@@ -9,13 +9,15 @@ namespace reg_claim4.Controllers
 {
     public  class AddClaimController : Controller
     {
-        userdbContext db = new userdbContext();
+       
         /// <summary>
         /// для заведения Заявок вывод запросов из БД во время заведения
         /// </summary>              
 
         public  ActionResult WhomUserClaimFromAD(string term)
-        {              
+        {
+            using (userdbContext db = new userdbContext())
+            {
                 var DisplayName1 = db.Ad_users
                     .Where(c => c.DisplayName.StartsWith(term))
                     .Select(c => c.DisplayName)
@@ -26,10 +28,10 @@ namespace reg_claim4.Controllers
 
                 if (DisplayName1.Count > 0)
                 {
-                System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       " + DisplayName1.Count);
-                return Json(DisplayName1, JsonRequestBehavior.AllowGet);
+                    System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       " + DisplayName1.Count);
+                    return Json(DisplayName1, JsonRequestBehavior.AllowGet);
                 }
-                
+
                 var userName1 = db.Ad_users
                      .Where(c => c.UserName.StartsWith(term))
                         .Select(c => c.UserName)
@@ -42,7 +44,20 @@ namespace reg_claim4.Controllers
                 {
                     return Json(userName1, JsonRequestBehavior.AllowGet);
                 }
-                       
+
+                var groupName = db.Ad_users
+                    .Where(c => c.group.StartsWith(term))
+                    .Select(c => c.group)
+                    .AsEnumerable()
+                    .Distinct()
+                    .Take(10)
+                    .ToList();
+
+                if (userName1.Count > 0)
+                {
+                    return Json(groupName, JsonRequestBehavior.AllowGet);
+                }
+            }           
             return Json("пользователь не найден", JsonRequestBehavior.AllowGet);
             
         }

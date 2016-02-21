@@ -3,6 +3,18 @@
     ViewBag.Title = "Зарегистрировать Заявку";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using reg_claim4.Controllers
+@{
+    string Name;
+    string Familia;
+    string Otchestvo;
+    string FullName;
+    AD.getUser(User.Identity.Name, out Familia, out Name, out Otchestvo);
+
+    FullName = Familia + " " + Name + " " + Otchestvo ;
+}
+
+
 <h4>Зарегистрировать Заявку</h4>
 @using (Html.BeginForm())
 {
@@ -15,7 +27,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for=".UserNameFrom">Заявитель</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UserNameFrom, new { htmlAttributes = new { @class = "form-control", @Value = User.Identity.Name } })
+                @Html.EditorFor(model => model.UserNameFrom, new { htmlAttributes = new { @class = "form-control", @Value = FullName } })
                 @Html.ValidationMessageFor(model => model.UserNameFrom, "", new { @class = "text-danger" })
             </div>
         </div>
