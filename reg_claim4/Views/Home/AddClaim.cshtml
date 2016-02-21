@@ -34,8 +34,12 @@
         <div class="form-group">
             <label class="control-label col-md-2" for=".UserNameWhom">Кому предназначена Заявка</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UserNameWhom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserNameWhom, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.UserNameWhom, new { htmlAttributes = new { @class = "form-control" ,
+               @data=@Url.Action("WhomUserClaimFromAD","AddClaim")
+           } })
+                @Html.ValidationMessageFor(model => model.UserNameWhom, "", new { @class = "text-danger",
+           @data=""
+           })
             </div>
         </div>
         <div class="form-group">
@@ -105,14 +109,14 @@
         });
     </script>*@
 
-    <input type="text" name="name" data-autocomplete-source='@Url.Action("WhomUserClaimFromAD","AddClaim")' />
+    <input type="text" name="name" data='@Url.Action("WhomUserClaimFromAD","AddClaim")' />
     <input type="submit" value="Поиск" />
 
     <script type="text/javascript">
     $(function () {
-        $("[data-autocomplete-source]").each(function () {
+        $("[data]").each(function () {
             var target = $(this);
-            target.autocomplete({ source: target.attr("data-autocomplete-source") });
+            target.autocomplete({ source: target.attr("data") });
         });
     });
     </script>
