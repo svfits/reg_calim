@@ -42,15 +42,15 @@
            })
             </div>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label class="control-label col-md-2" for=".GroupWhom">Группа которой назначить заявку</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.GroupWhom, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.GroupWhom, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
         <div class="form-group">
-            @Html.LabelFor(model => model.ClaimeName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for=".UserNameWhom">Название заявки</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ClaimeName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ClaimeName, "", new { @class = "text-danger" })
@@ -109,8 +109,8 @@
         });
     </script>*@
 
-    <input type="text" name="name" data='@Url.Action("WhomUserClaimFromAD","AddClaim")' />
-    <input type="submit" value="Поиск" />
+    @*<input type="text" name="name" data='@Url.Action("WhomUserClaimFromAD","AddClaim")' />
+    <input type="submit" value="Поиск" />*@
 
     <script type="text/javascript">
     $(function () {
