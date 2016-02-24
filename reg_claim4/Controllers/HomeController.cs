@@ -129,19 +129,18 @@ namespace reg_claim4.Controllers
         [HttpPost]
         [Log]
         public string AddClaim(string UserNameFrom, string UserNameWhom,string GroupWhom,string evants,string ClaimeName,string parents,string category, string claimBody)
-        {        
-
+        { 
             try
             {
                 db.claim.Add(new claim()
                 {
                     UserNameFrom = User.Identity.Name,
-                    ClaimeName = "Заявка",
-                    UserNameWhom = "",
+                    ClaimeName = ClaimeName,
+                    UserNameWhom = UserNameWhom,
                     claimBody = claimBody,
                     dataTimeOpen = DateTime.Now,
-                    dataTimeEnd = DateTime.Now,
-                    evants = evants,
+                    dataTimeEnd = DateTime.Now.AddMinutes(5),
+                    evants = "заявка создана",
                     parents = parents,
                     category = category
                 });
