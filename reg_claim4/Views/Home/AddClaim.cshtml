@@ -50,9 +50,11 @@
             </div>
         </div>*@
         <div class="form-group">
-            <label class="control-label col-md-2" for=".UserNameWhom">Название заявки</label>
+            <label class="control-label col-md-2" for=".ClaimeName">Название заявки</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ClaimeName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ClaimeName, new { htmlAttributes = new { @class = "form-control" ,
+                @dataClaimeName=@Url.Action("ClaimeName", "AddClaim")
+           } })
                 @Html.ValidationMessageFor(model => model.ClaimeName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -117,6 +119,15 @@
         $("[data]").each(function () {
             var target = $(this);
             target.autocomplete({ source: target.attr("data") });
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+    $(function () {
+        $("[dataClaimeName]").each(function () {
+            var target = $(this);
+            target.autocomplete({ source: target.attr("dataClaimeName") });
         });
     });
     </script>

@@ -170,7 +170,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Ad_users.cs" />
-    <Compile Include="Models\category_claim.cs" />
+    <Compile Include="Models\ClaimName.cs" />
     <Compile Include="Models\claim.cs" />
     <Compile Include="Models\logs.cs" />
     <Compile Include="Models\userdbContext.cs" />

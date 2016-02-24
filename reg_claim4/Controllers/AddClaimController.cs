@@ -46,7 +46,7 @@ namespace reg_claim4.Controllers
                 }
 
                 var groupName = db.Ad_users
-                    .Where(c => c.group.StartsWith(term))
+                    .Where(c => c.group.Contains(term))
                     .Select(c => c.group)
                     .AsEnumerable()
                     .Distinct()
@@ -61,6 +61,30 @@ namespace reg_claim4.Controllers
             return Json("пользователь не найден", JsonRequestBehavior.AllowGet);
             
         }
-      
+
+        //выборка названия заявок заявок и времени закрытия 
+
+        public ActionResult ClaimeName(string term)
+        {
+            return Json("тип заявки не найден", JsonRequestBehavior.AllowGet);
+            using (userdbContext db = new userdbContext())
+            {
+                var ClaimName = db.ClaimeName
+                    .Where(c => c.ClaimeName.StartsWith(term))
+                    .Select(c => c.ClaimeName)
+                    .AsEnumerable()
+                    .Distinct()
+                    .Take(10)
+                    .ToList();
+
+                if (ClaimName.Count > 0)
+                {
+                    System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       " + ClaimName.Count);
+                    return Json(ClaimName, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json("тип заявки не найден", JsonRequestBehavior.AllowGet);
+            }
+        }        
     }
 }
