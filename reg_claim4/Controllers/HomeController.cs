@@ -133,7 +133,7 @@ namespace reg_claim4.Controllers
 
             try
             {
-                db.ClaimeName.Add(new claim()
+                db.claim.Add(new claim()
                 {
                     UserNameFrom = User.Identity.Name,
                     ClaimeName = "Заявка",

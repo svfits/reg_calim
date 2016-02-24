@@ -70,8 +70,8 @@ namespace reg_claim4.Controllers
             using (userdbContext db = new userdbContext())
             {
                 var ClaimName = db.ClaimeName
-                    .Where(c => c.ClaimeName.StartsWith(term))
-                    .Select(c => c.ClaimeName)
+                    .Where(c => c.claimName.Contains(term))
+                    .Select(c => c.claimName)
                     .AsEnumerable()
                     .Distinct()
                     .Take(10)
