@@ -53,7 +53,7 @@ namespace reg_claim4.Controllers
                     .Take(10)
                     .ToList();
 
-                if (userName1.Count > 0)
+                if (groupName.Count > 0)
                 {
                     return Json(groupName, JsonRequestBehavior.AllowGet);
                 }
@@ -66,7 +66,7 @@ namespace reg_claim4.Controllers
 
         public ActionResult ClaimeName(string term)
         {
-            return Json("тип заявки не найден", JsonRequestBehavior.AllowGet);
+            //return Json("тип заявки не найден", JsonRequestBehavior.AllowGet);
             using (userdbContext db = new userdbContext())
             {
                 var ClaimName = db.ClaimeName
