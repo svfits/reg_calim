@@ -84,7 +84,7 @@ namespace reg_claim4.Controllers
             ViewBag.SecondName = SecondName;
             ViewBag.Text = Request.UserHostName + "  444 " + PC.GetIPAddress();
 
-            //  AD.FromADtoBD();  //добавление пользователей в из АД
+           // AD.FromADtoBD();  //добавление пользователей в из АД
            // AddClaimController.WhomUserClaimFromAD("fffff");
            // AddClaimController.WhomUserClaimFromAD("Ковал");
 
@@ -109,7 +109,14 @@ namespace reg_claim4.Controllers
 
         [Log]
         public ActionResult ViewPage1()
-        {                                  
+        {
+            //db.ClaimeName.Add(new ClaimeName()
+            //{
+            //    claimName = "Сменить пароль студенту",
+            //    dataEndClaim = 5
+            //});
+            //db.SaveChanges();
+                                          
             IEnumerable<logs> log = db.logs
                 .AsEnumerable()
                 .Reverse()

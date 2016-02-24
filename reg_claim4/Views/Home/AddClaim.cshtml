@@ -27,7 +27,9 @@
         <div class="form-group">
             <label class="control-label col-md-2" for=".UserNameFrom">Заявитель</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UserNameFrom, new { htmlAttributes = new { @class = "form-control", @Value = FullName } })
+                @Html.EditorFor(model => model.UserNameFrom, new { htmlAttributes = new { @class = "form-control", @Value = FullName,
+                @whoAmiFromClaim = @Url.Action("WhomUserClaimFromAD", "AddClaim")
+                } })
                 @Html.ValidationMessageFor(model => model.UserNameFrom, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -59,7 +61,7 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.claimBody, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for=".ClaimeName">Тело Заявки</label>
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.claimBody, 5, 10, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.claimBody, "", new { @class = "text-danger" })
@@ -67,7 +69,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.dataTimeEnd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for=".ClaimeName">Время закрытия Заявки</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.dataTimeEnd, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.dataTimeEnd, "", new { @class = "text-danger" })
@@ -75,19 +77,19 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.parents, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for=".ClaimeName">Родительская заявка</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.parents, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.parents, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.category, htmlAttributes: new { @class = "control-label col-md-2" })
+        @*<div class="form-group">
+            <label class="control-label col-md-2" for=".ClaimeName">Тело Заявки</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.category, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.category, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -128,6 +130,15 @@
         $("[dataClaimeName]").each(function () {
             var target = $(this);
             target.autocomplete({ source: target.attr("dataClaimeName") });
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+    $(function () {
+        $("[whoAmiFromClaim]").each(function () {
+            var target = $(this);
+            target.autocomplete({ source: target.attr("whoAmiFromClaim") });
         });
     });
     </script>
