@@ -85,6 +85,27 @@ namespace reg_claim4.Controllers
 
                 return Json("тип заявки не найден", JsonRequestBehavior.AllowGet);
             }
-        }        
+        }
+
+        [HttpPost]
+        public ActionResult DataTimeEnd(string date_end)
+        {
+            //  dataTimeEnd = "fffff";
+            System.Diagnostics.Debug.WriteLine("aaaaaaaaaa     " + date_end);
+            using (userdbContext db = new userdbContext())
+            {
+                var dataTimeEn = db.ClaimeName
+                                  .Where(c => c.claimName == date_end)
+                    .Select(c => c.dataEndClaim)
+                    .AsEnumerable()
+                    .Distinct()
+                    .Take(10)
+                    .ToList();
+
+                System.Diagnostics.Debug.WriteLine("rrrrrrrr   " + " " + dataTimeEn    + "   " + dataTimeEn);
+                return Json(dataTimeEn, JsonRequestBehavior.AllowGet);
+            }
+            return Json("-------", JsonRequestBehavior.AllowGet);
+        }   
     }
 }

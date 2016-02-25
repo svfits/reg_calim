@@ -69,9 +69,11 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for=".ClaimeName">Время закрытия Заявки</label>
+            <label class="control-label col-md-2" for=".dataTimeEnd">Время закрытия Заявки</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.dataTimeEnd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.dataTimeEnd, new { htmlAttributes = new { @class = "form-control" ,
+                @id = "dataTimeEnd"
+           } })
                 @Html.ValidationMessageFor(model => model.dataTimeEnd, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -117,24 +119,43 @@
     <input type="submit" value="Поиск" />*@
 
     <script type="text/javascript">
+        //кому зявка
     $(function () {
         $("[data]").each(function () {
             var target = $(this);
             target.autocomplete({ source: target.attr("data") });
         });
     });
-    </script>
 
-    <script type="text/javascript">
+
+    //название заявки и вставить дату
     $(function () {
         $("[dataClaimeName]").each(function () {
             var target = $(this);
             target.autocomplete({ source: target.attr("dataClaimeName") });
+            target.autocomplete({
+                select: function (event, ui) {
+                    console.log(ui.item.value);                    
+                    dataTimeEnd(ui.item.value);
+                }
+            });
         });
     });
-    </script>
 
-    <script type="text/javascript">
+    function dataTimeEnd(date_end) {
+        $.ajax({
+            type: "POST",
+            url: "/AddClaim/DataTimeEnd",
+            data: {
+                date_end: date_end
+            },
+            success: function (data) {
+                document.getElementById("dataTimeEnd").innerHTML = data;
+            }
+        });
+    }
+
+    // откого заявка по умолчанию тот кто открыл страницу
     $(function () {
         $("[whoAmiFromClaim]").each(function () {
             var target = $(this);
@@ -142,7 +163,7 @@
         });
     });
     </script>
-
+    
 }
 <div>
     @Html.ActionLink("Вернутся на главную страинцу", "Index")
