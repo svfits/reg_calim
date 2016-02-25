@@ -79,7 +79,7 @@ namespace reg_claim4.Controllers
 
                 if (ClaimName.Count > 0)
                 {
-                    System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       " + ClaimName.Count);
+                    System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       " + ClaimName.Count);  
                     return Json(ClaimName, JsonRequestBehavior.AllowGet);
                 }
 
