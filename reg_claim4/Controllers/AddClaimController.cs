@@ -79,7 +79,7 @@ namespace reg_claim4.Controllers
 
                 if (ClaimName.Count > 0)
                 {
-                    System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       " + ClaimName.Count);  
+                    System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       " + ClaimName.Count);
                     return Json(ClaimName, JsonRequestBehavior.AllowGet);
                 }
 
@@ -95,7 +95,7 @@ namespace reg_claim4.Controllers
             using (userdbContext db = new userdbContext())
             {
                 var dataTimeEn = db.ClaimeName
-                                  .Where(c => c.claimName == date_end)
+                    .Where(c => c.claimName == date_end)
                     .Select(c => c.dataEndClaim)
                     .AsEnumerable()
                     .Distinct()
@@ -105,7 +105,7 @@ namespace reg_claim4.Controllers
                 System.Diagnostics.Debug.WriteLine("rrrrrrrr   " + " " + dataTimeEn    + "   " + dataTimeEn);
                 return Json(dataTimeEn, JsonRequestBehavior.AllowGet);
             }
-            return Json("-------", JsonRequestBehavior.AllowGet);
+          //  return Json("-------", JsonRequestBehavior.AllowGet);
         }   
     }
 }
