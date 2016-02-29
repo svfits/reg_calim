@@ -136,7 +136,7 @@ namespace reg_claim4.Controllers
         [HttpPost]
         [Log]
         public string AddClaim(string UserNameFrom, string UserNameWhom,string GroupWhom,string evants,string ClaimeName,string parents,string category, string claimBody)
-        { 
+        {           
             try
             {
                 db.claim.Add(new claim()

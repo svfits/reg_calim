@@ -32,7 +32,11 @@ function dataTimeEnd(date_end) {
         },
         success: function (data) {           
             console.log(data);
-            $('#dataTimeEnd').datetimepicker();
+            $('#dataTimeEnd').datetimepicker({                
+               
+                    format: 'DD.MM.YYYY HH:MM'
+               
+            });
         }
     });
 }
