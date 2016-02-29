@@ -13,7 +13,7 @@
 
     FullName = Familia + " " + Name + " " + Otchestvo ;
 }
-
+@Scripts.Render("~/Scripts/autocomplecte_addClaim.js")
 
 <h4>Зарегистрировать Заявку</h4>
 @using (Html.BeginForm())
@@ -94,75 +94,11 @@
         </div>*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Создать Заявку" class="btn btn-default" />
             </div>
         </div>
     </div>
-
-
-    @*<input id="acInput" type="text" data-WhomUserClaimFromAD='@Url.Action("WhomUserClaimFromAD","AddClaim")' />
-
-    <script type="text/javascript">
-        $(function() {
-
-            var flowers = ["Астра", "Нарцисс", "Роза", "Пион", "Примула",
-			      "Подснежник", "Мак", "Первоцвет", "Петуния", "Фиалка"];
-
-            $('#acInput').autocomplete({
-                source:flowers,
-                minLength:  2
-            })
-        });
-    </script>*@
-
-    @*<input type="text" name="name" data='@Url.Action("WhomUserClaimFromAD","AddClaim")' />
-    <input type="submit" value="Поиск" />*@
-
-    <script type="text/javascript">
-        //кому зявка
-    $(function () {
-        $("[data]").each(function () {
-            var target = $(this);
-            target.autocomplete({ source: target.attr("data") });
-        });
-    });
-
-
-    //название заявки и вставить дату
-    $(function () {
-        $("[dataClaimeName]").each(function () {
-            var target = $(this);
-            target.autocomplete({ source: target.attr("dataClaimeName") });
-            target.autocomplete({
-                select: function (event, ui) {
-                    console.log(ui.item.value);                    
-                    dataTimeEnd(ui.item.value);
-                }
-            });
-        });
-    });
-
-    function dataTimeEnd(date_end) {
-        $.ajax({
-            type: "POST",
-            url: "/AddClaim/DataTimeEnd",
-            data: {
-                date_end: date_end
-            },
-            success: function (data) {
-                document.getElementById("dataTimeEnd").innerHTML = data;
-            }
-        });
-    }
-
-    // откого заявка по умолчанию тот кто открыл страницу
-    $(function () {
-        $("[whoAmiFromClaim]").each(function () {
-            var target = $(this);
-            target.autocomplete({ source: target.attr("whoAmiFromClaim") });
-        });
-    });
-    </script>
+ 
     
 }
 <div>
