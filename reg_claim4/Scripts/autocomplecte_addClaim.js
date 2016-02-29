@@ -22,6 +22,7 @@ $(function () {
     });
 });
 
+//вставить время и дату 
 function dataTimeEnd(date_end) {
     $.ajax({
         type: "POST",
@@ -29,8 +30,9 @@ function dataTimeEnd(date_end) {
         data: {
             date_end: date_end
         },
-        success: function (data) {
-            document.getElementById("dataTimeEnd").innerHTML = data;
+        success: function (data) {           
+            console.log(data);
+            $('#dataTimeEnd').datetimepicker();
         }
     });
 }
