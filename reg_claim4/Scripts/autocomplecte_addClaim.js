@@ -33,7 +33,7 @@ function dataTimeEnd(date_end) {
         success: function (data) {           
             console.log(data);
             $('#dataTimeEnd').datetimepicker({                
-                format: 'DD.MM.YYYY HH:mm', minDate: Date(), maxDate: maxDate(data)
+                format: 'DD.MM.YYYY HH:mm', minDate: Date(), maxDate: maxDate(data)  
             });          
         }
     });
