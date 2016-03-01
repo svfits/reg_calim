@@ -33,12 +33,29 @@ function dataTimeEnd(date_end) {
         success: function (data) {           
             console.log(data);
             $('#dataTimeEnd').datetimepicker({                
-                format: 'DD.MM.YYYY HH:mm', minDate: Date(), maxDate: maxDate(data)  
-            });          
+                // format: 'DD.MM.YYYY HH:mm', minDate: Date(), maxDate: maxDate(data), defaultDate: "01.01.2008 16:45"
+                maxDate: maxxDate(data), defaultDate: maxxDate(data), format: 'DD.MM.YYYY HH:mm', locale: 'ru'
+            });
+            //$('#dataTimeEnd').datetimepicker({
+            //      maxDate: maxDate(data)              
+            //});
         }
     });
 }
-function maxDate(data)
+
+function minnDate()
+{
+    var ret = new Date();
+    var MM = ret.getMonth() + 1;
+    var MM = "0" + MM;
+    var DD = "0" + ret.getDay() - 1;
+
+    tt = MM +"."+ DD + "." + ret.getFullYear() + " " + ret.getHours() + ":" + ret.getMinutes()
+    console.log("минимальное время  " + tt);
+   // var tt = "03.01.2016 10:12";
+    return tt
+}
+function maxxDate(data)
 {
    // console.log(data);
     if (getWeek() == 6)
@@ -64,9 +81,7 @@ function maxDate(data)
 }
 
 function getWeek() {
-    var date = new Date();
-    //getWeekDay(date);
-    //console.log(date.getDay());
+    var date = new Date();  
     return date.getDay();
 }
 
