@@ -13,60 +13,99 @@ namespace reg_claim4.Controllers
         /// <summary>
         /// для заведения Заявок вывод запросов из БД во время заведения
         /// </summary>              
-        
-        [HttpPost]
-        public  ActionResult WhomUserClaimFromAD(string letters)
+
+        public  ActionResult WhomUserClaimFromAD(string term)
         {
-            userdbContext db = new userdbContext();
-           
-            try
+            using (userdbContext db = new userdbContext())
             {
-                var user = db.Ad_users
-                    .Where(c => c.UserName.StartsWith(letters))
-                    .AsEnumerable()                    
+                var DisplayName1 = db.Ad_users
+                    .Where(c => c.DisplayName.StartsWith(term))
+                    .Select(c => c.DisplayName)
+                    .AsEnumerable()
+                    .Distinct()
                     .Take(10)
                     .ToList();
 
-              foreach(var item in user)
+                if (DisplayName1.Count > 0)
                 {
-                  //  System.Diagnostics.Debug.WriteLine(item.Email.ToString());
-                    System.Diagnostics.Debug.WriteLine(item.UserName.ToString());
-                  //  System.Diagnostics.Debug.WriteLine(item.DisplayName.ToString());
-                }            
-              
-                //System.Diagnostics.Debug.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                
-                if (user.Count<=0)
-                {
-                  System.Diagnostics.Debug.WriteLine("не найден пользователь!!!!!!!!!!!!!!!!!!!");
-                    user = db.Ad_users
-                   .Where(c => c.DisplayName.StartsWith(letters))
-                   .AsEnumerable()
-                   .Take(10)
-                   .ToList();
-                    
-                    foreach (var item in user)
-                    {
-                       // System.Diagnostics.Debug.WriteLine(item.Email.ToString());
-                       // System.Diagnostics.Debug.WriteLine(item.UserName.ToString());
-                        System.Diagnostics.Debug.WriteLine(item.DisplayName.ToString());
-                    }
+                    System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       " + DisplayName1.Count);
+                    return Json(DisplayName1, JsonRequestBehavior.AllowGet);
+                }
 
-                 return   PartialView(User);
-                }
-                else
+                var userName1 = db.Ad_users
+                     .Where(c => c.UserName.StartsWith(term))
+                        .Select(c => c.UserName)
+                        .AsEnumerable()
+                        .Distinct()
+                        .Take(10)
+                        .ToList();
+
+                if (userName1.Count > 0)
                 {
-                    return PartialView(User);
+                    return Json(userName1, JsonRequestBehavior.AllowGet);
                 }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-                System.Diagnostics.Debug.WriteLine("ошибка пользователь не найден ");
-                return HttpNotFound();
-            }
-            return PartialView(User);
+
+                var groupName = db.Ad_users
+                    .Where(c => c.group.Contains(term))
+                    .Select(c => c.group)
+                    .AsEnumerable()
+                    .Distinct()
+                    .Take(10)
+                    .ToList();
+
+                if (groupName.Count > 0)
+                {
+                    return Json(groupName, JsonRequestBehavior.AllowGet);
+                }
+            }           
+            return Json("пользователь не найден", JsonRequestBehavior.AllowGet);
+            
         }
-      
+
+        //выборка названия заявок заявок и времени закрытия 
+
+        public ActionResult ClaimeName(string term)
+        {
+            //return Json("тип заявки не найден", JsonRequestBehavior.AllowGet);
+            using (userdbContext db = new userdbContext())
+            {
+                var ClaimName = db.ClaimeName
+                    .Where(c => c.claimName.Contains(term))
+                    .Select(c => c.claimName)
+                    .AsEnumerable()
+                    .Distinct()
+                    .Take(10)
+                    .ToList();
+
+                if (ClaimName.Count > 0)
+                {
+                    System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       " + ClaimName.Count);
+                    return Json(ClaimName, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json("тип заявки не найден", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DataTimeEnd(string date_end)
+        {
+            //  dataTimeEnd = "fffff";
+            System.Diagnostics.Debug.WriteLine("aaaaaaaaaa     " + date_end);
+            using (userdbContext db = new userdbContext())
+            {
+                var dataTimeEn = db.ClaimeName
+                    .Where(c => c.claimName == date_end)
+                    .Select(c => c.dataEndClaim)
+                    .AsEnumerable()
+                    .Distinct()
+                    .Take(10)
+                    .ToList();
+
+                System.Diagnostics.Debug.WriteLine("rrrrrrrr   " + " " + dataTimeEn    + "   " + dataTimeEn);
+                return Json(dataTimeEn, JsonRequestBehavior.AllowGet);
+            }
+          //  return Json("-------", JsonRequestBehavior.AllowGet);
+        }   
     }
 }

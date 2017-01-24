@@ -84,7 +84,7 @@ namespace reg_claim4.Controllers
             ViewBag.SecondName = SecondName;
             ViewBag.Text = Request.UserHostName + "  444 " + PC.GetIPAddress();
 
-            //  AD.FromADtoBD();  //добавление пользователей в из АД
+           // AD.FromADtoBD();  //добавление пользователей в из АД
            // AddClaimController.WhomUserClaimFromAD("fffff");
            // AddClaimController.WhomUserClaimFromAD("Ковал");
 
@@ -109,8 +109,19 @@ namespace reg_claim4.Controllers
 
         [Log]
         public ActionResult ViewPage1()
-        {                                  
-            IEnumerable<logs> log = db.logs;
+        {
+            //db.ClaimeName.Add(new ClaimeName()
+            //{
+            //    claimName = "Сменить пароль студенту",
+            //    dataEndClaim = 5
+            //});
+            //db.SaveChanges();
+                                          
+            IEnumerable<logs> log = db.logs
+                .AsEnumerable()
+                .Reverse()
+                .Take(10)
+                .Reverse();
             ViewBag.Message = log;
             return View();
         }
@@ -125,19 +136,18 @@ namespace reg_claim4.Controllers
         [HttpPost]
         [Log]
         public string AddClaim(string UserNameFrom, string UserNameWhom,string GroupWhom,string evants,string ClaimeName,string parents,string category, string claimBody)
-        {        
-
+        {           
             try
             {
-                db.ClaimeName.Add(new claim()
+                db.claim.Add(new claim()
                 {
                     UserNameFrom = User.Identity.Name,
-                    ClaimeName = "Заявка",
-                    UserNameWhom = "",
+                    ClaimeName = ClaimeName,
+                    UserNameWhom = UserNameWhom,
                     claimBody = claimBody,
                     dataTimeOpen = DateTime.Now,
-                    dataTimeEnd = DateTime.Now,
-                    evants = evants,
+                    dataTimeEnd = DateTime.Now.AddMinutes(5),
+                    evants = "заявка создана",
                     parents = parents,
                     category = category
                 });
